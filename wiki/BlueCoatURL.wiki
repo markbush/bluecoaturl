@@ -1,0 +1,28 @@
+#summary The BlueCoat URL Application
+
+= Introduction =
+
+This is an application to manage the firewall rules for BlueCoat SG devices.  It has been written in Ruby on Rails.  The main features are:
+ * Allows specified people to manage URLs in categories
+ * Admin users can manage categories, firewalls and user access
+ * Deployment users can arrange for firewalls to update with the latest configuration
+
+
+= Details =
+
+To install you must have Rails installed.  You will also need the RMagick and net-ssh gems.
+
+By default, the application expects to connect to a mysql database.  Create the databases:
+ * bluecoat_development
+ * bluecoat_test
+ * bluecoat_production
+
+You will only need the production database for deployment, however it is always good practive to have a development installation to ensure that upgrades can be tested in your environment before you upgrade your live system.
+
+The supplied configuration assumes that you will use MySQL with the default login credentials.  If you change your database or how you log in to it, then you will need to update config/database.yml accordingly.
+
+After the migrations are loaded into your database, you'll have an initial *admin* user (with password *admin*) to manage things with.
+
+To enable your firewalls to update from the application, point them at /url/downloadurllist beneath the application's main URL.  This address is used to access the config in the correct format for the firewall.
+
+If you have a configuration already that you wish to import, there is an option available for you to upload this into the application.
