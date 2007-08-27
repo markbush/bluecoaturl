@@ -1,0 +1,31 @@
+<p>
+  <label for="webaddress_site">Site:</label>
+  <%= text_field :webaddress, :site, :size => 60 %><br/>
+  <label>&nbsp;</label>
+  (Enter just the site host name eg: www.example.com)
+</p>
+<p>
+  <label for="webaddress_path">Path:</label>
+  <%= text_field :webaddress, :path, :size => 60 %><br/>
+  <label>&nbsp;</label>
+  (Enter the page path eg: /some/web/page.html<br/>
+  <label>&nbsp;</label>
+  Use "/" to refer to the whole website)
+</p>
+<p>
+  <label for="webaddress_reason">Reason:</label>
+  <%= text_field :webaddress, :reason, :size => 60 %><br/>
+  <label>&nbsp;</label>
+  (State why you are adding this URL to this category)
+</p>
+<p>
+  <label for="webaddress_ticket">Ticket #:</label>
+  <%= text_field :webaddress, :ticket, :size => 60 %><br/>
+  <label>&nbsp;</label>
+  (Provide a helpdesk ticket number if available)
+</p>
+<p>
+  <label for="webaddress_category_ids">Category:</label>
+  <%= select :webaddress, :category_ids, @categories,
+             {:selected => @selected}, {:multiple => 'multiple', :size => '10'} %>
+</p>

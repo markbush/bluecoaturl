@@ -1,0 +1,72 @@
+<div id="bluecoat-list">
+  <h1>URLs</h1>
+  <div class="bluecoat-form">
+    <fieldset>
+      <legend><%= link_to_function "Search", "new Effect.toggle('searchbox', 'slide')" %></legend>
+        <div id="searchbox" style="display: none">
+          <% form_tag :sort => @selected do %>
+            <%= render :partial => 'search' %>
+            <%= submit_tag "Search", :class => :submit %>
+            <%= tag :input, {:type => :reset, :class => :submit} %>
+          <% end %>
+        </div>
+    </fieldset>
+  </div>
+  <table cellpadding="5" class="bluecoat-table">
+    <tr>
+      <th class="url">
+        <%= link_to "URL", :action => :list, :sort => :site %>
+      </th>
+      <% if session[:user_admin] %>
+        <th class="ticket">Ticket</th>
+      <% end %>
+      <th class="reason">Reason</th>
+      <% if session[:user_admin] %>
+        <th class="user">User</th>
+      <% end %>
+      <% for category in @categories %>
+        <th class="category">
+          <%= link_to (image_tag url_for(:controller => :admin, :action => :category_image,
+                                         :id => category, :skip_relative_url_root => true),
+                      :title => h(category.description),
+                      :class => (category.id == @selected)? "order": "notorder"),
+                      :action => :list, :sort => category %>
+        </th>
+      <% end %>
+    </tr>
+    <% for webaddress in @webaddresses %>
+      <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+        <td><%= link_to h(webaddress.address),
+                        :action => :edit, :id => webaddress %></td>
+        <% if session[:user_admin] %>
+          <td><%= h(webaddress.ticket) %></td>
+        <% end %>
+        <td><%= h(webaddress.reason) %></td>
+        <% if session[:user_admin] %>
+          <td><%= h(webaddress.user.name) %></td>
+        <% end %>
+        <%= render :partial => 'toggle', :collection => @categories,
+                   :locals => {:webaddress => webaddress} %>
+      </tr>
+    <% end %>
+  </table>
+  <hr/>
+  <p>
+    <%= link_to(h('< Previous'),
+                {:page => @webaddress_pages.current.previous,
+                 :sort => @selected,
+                 :urls_in_category => params[:urls_in_category],
+                 :search_categories => params[:search_categories],
+                 :search_url => params[:search_url]})  + " | " if @webaddress_pages.current.previous %>
+    <%= pagination_links @webaddress_pages, :params => {:sort => @selected,
+                                                        :urls_in_category => params[:urls_in_category],
+                                                        :search_categories => params[:search_categories],
+                                                        :search_url => params[:search_url]} %>
+    <%= " | " + link_to(h('Next >'),
+                        {:page => @webaddress_pages.current.next,
+                         :sort => @selected,
+                         :urls_in_category => params[:urls_in_category],
+                         :search_categories => params[:search_categories],
+                         :search_url => params[:search_url]}) if @webaddress_pages.current.next %>
+  </p>
+</div>

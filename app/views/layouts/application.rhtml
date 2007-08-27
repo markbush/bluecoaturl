@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>BlueCoat Category Application</title>
+  <%= stylesheet_link_tag 'scaffold', 'bluecoat', :media => 'all' %>
+  <%= javascript_include_tag :defaults %>
+</head>
+<body id="admin">
+  <div id="columns">
+    <div id="side">
+      <% if session[:user_name] %>
+        <p>
+          <%= link_to "Urls",              :controller => :url,   :action => :list %>
+        </p>
+        <p>
+          <%= link_to "Add Url",           :controller => :url,   :action => :new %>
+        </p>
+        <% if session[:user_admin] %>
+          <p>
+            <%= link_to "Orphaned URLs",   :controller => :url,   :action => :list_orphaned %>
+          </p>
+          <p>
+            <%= link_to "Download URLs",   :controller => :url,   :action => :download %>
+          </p>
+          <p>
+            <%= link_to "Upload URLs",     :controller => :url,   :action => :upload %>
+          </p>
+          <p>
+            <%= link_to "Categories",      :controller => :admin, :action => :list %>
+          </p>
+          <p>
+            <%= link_to "Add Category",    :controller => :admin, :action => :new %>
+          </p>
+          <p>
+            <%= link_to "Users",           :controller => :login, :action => :list %>
+          </p>
+          <p>
+            <%= link_to "Add User",        :controller => :login, :action => :new %>
+          </p>
+          <p>
+            <%= link_to "Hosts",           :controller => :hosts, :action => :list %>
+          </p>
+          <p>
+            <%= link_to "Add Host",        :controller => :hosts, :action => :new %>
+          </p>
+        <% end %>
+        <% if session[:user_can_deploy] || session[:user_admin] %>
+          <p>
+            <%= link_to "Deploy To Hosts", :controller => :hosts, :action => :deploy %>
+          </p>
+        <% end %>
+        <p>
+          <%= link_to "Change Password",   :controller => :login, :action => :change_password %>
+        </p>
+        <p>
+          <%= link_to "Logout: #{session[:user_name]}",
+                                           :controller => :login, :action => :logout %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to "Login",             :controller => :login, :action => :login %>
+        </p>
+      <% end %>
+    </div>
+    <div id="main">
+      <% if flash[:notice] -%>
+        <div id="notice"><%= flash[:notice] %></div>
+      <% end -%>
+      <%= yield :layout %>
+    </div>
+  </div>
+</body>
+</html>
