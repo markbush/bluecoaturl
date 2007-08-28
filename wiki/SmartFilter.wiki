@@ -14,12 +14,14 @@ Secure Computing is not the only vendor to offer URL categorisation services.
 
 [http://www.bluecoat.com/products/webfilter/index.html BlueCoat] themselves offer a "dynamic" service that looks-up URLs in real-time against a distributed set of servers.  Other vendors supported by the !BlueCoat Proxy SG :
 
-  * !i-FILTER
+  * i-FILTER
   * !InterSafe
-  * !IWF
-  * !Optenet
-  * !Proventia
+  * IWF
+  * Optenet
+  * Proventia
   * !SurfContorl
-  * !Websense
-  * !Webwasher
+  * Websense
+  * Webwasher
+
+
 
