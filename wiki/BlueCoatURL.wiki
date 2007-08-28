@@ -2,10 +2,10 @@
 
 = Introduction =
 
-This is an application to manage the firewall rules for !BlueCoat SG devices.  It has been written in Ruby on Rails.  The main features are:
+This is an application to manage the local URL database for !BlueCoat SG Proxy devices.  It has been written in Ruby on Rails.  The main features are:
  * Allows specified people to manage URLs in categories
  * Admin users can manage categories, firewalls and user access
- * Deployment users can arrange for firewalls to update with the latest configuration
+ * Deployment users can arrange for proxies to update with the latest configuration
 
 
 = Details =
@@ -23,6 +23,8 @@ The supplied configuration assumes that you will use MySQL with the default logi
 
 After the migrations are loaded into your database, you'll have an initial *admin* user (with password *admin*) to manage things with.
 
-To enable your firewalls to update from the application, point them at /url/downloadurllist beneath the application's main URL.  This address is used to access the config in the correct format for the firewall.
+To enable your BlueCoat proxies to update from the application, point them at /url/downloadurllist beneath the application's main URL.  This address is used to access the config in the correct format for the device.  No user authentication is required.
 
 If you have a configuration already that you wish to import, there is an option available for you to upload this into the application.
+
+The BlueCoat proxy only allows for a scheduled download *once* per day; the deployment option allows specified users to deploy on-demand.
