@@ -2,13 +2,12 @@
 
 = Introduction =
 
-Add your content here.
+The application was designed to manage overrides for a 3rd party URL list (such as SmartFilter from Secure Computing).  There are times when, for whatever reason, the URL is mis-categorised - or there is a legitimate reasone to allow your users access to the site.
 
+If a 3rd party URL list is not in use - the Local BlueCoat list managed by this application could also be used for some rudimentary filtering or "whitelist" functionality.
 
-= Details =
+= Enabling local URL usage =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Login to the admin console of the ProxySG device
 
+= Using within rules =
