@@ -4,7 +4,7 @@
 
 This is an application to manage the local URL database for !BlueCoat SG Proxy devices.  It has been written in Ruby on Rails.  The main features are:
  * Allows specified people to manage URLs in categories
- * Admin users can manage categories, firewalls and user access
+ * Admin users can manage categories, proxy devices and user access
  * Deployment users can arrange for proxies to update with the latest configuration
 
 
