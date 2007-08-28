@@ -107,6 +107,13 @@ module Expect
       @data
       rescue Timeout::Error
         return :TIMEOUT
+      rescue TypeError
+        # If the channel has closed from the remote end and we haven't
+        # received the notification, net-ssh reads a nil but tries to
+        # append it to the data string resulting in this error.
+        # We treat this situation as if the connection has closed.
+        self.close
+        return nil
       end
     end
     def close
