@@ -46,7 +46,7 @@ class HostsController < ApplicationController
     begin
       @host = Host.find(params[:id])
       if @host.update_attributes(params[:host])
-        flash[:notice] = 'Host #{@host.hostname} updated'
+        flash[:notice] = "Host #{@host.hostname} updated"
         redirect_to :action => :list
       else
         render :action => :edit
