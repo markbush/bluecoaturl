@@ -21,7 +21,9 @@ You will only need the production database for deployment, however it is always 
 
 The supplied configuration assumes that you will use MySQL with the default login credentials.  If you change your database or how you log in to it, then you will need to update config/database.yml accordingly.
 
-After the migrations are loaded into your database, you'll have an initial *admin* user (with password *admin*) to manage things with.
+After you load the schema, you'll need to create an initial admin user.
+
+See the [InstallationGuide Installation Guide] for full details on how to install and setup the application.
 
 To enable your !BlueCoat proxies to update from the application, point them at /url/downloadurllist beneath the application's main URL.  This address is used to access the config in the correct format for the device.  No user authentication is required.
 
