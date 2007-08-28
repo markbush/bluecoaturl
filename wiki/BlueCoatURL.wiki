@@ -2,7 +2,7 @@
 
 = Introduction =
 
-This is an application to manage the firewall rules for BlueCoat SG devices.  It has been written in Ruby on Rails.  The main features are:
+This is an application to manage the firewall rules for !BlueCoat SG devices.  It has been written in Ruby on Rails.  The main features are:
  * Allows specified people to manage URLs in categories
  * Admin users can manage categories, firewalls and user access
  * Deployment users can arrange for firewalls to update with the latest configuration
