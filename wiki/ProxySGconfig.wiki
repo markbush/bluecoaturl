@@ -1,5 +1,5 @@
 #summary How to setup the ProxySG
-[http://code.google.com/p/bluecoaturl/ [TOP]]
+[http://code.google.com/p/bluecoaturl/ [HOME]]
 
 = Introduction =
 
@@ -16,3 +16,5 @@ http://bluecoaturl.googlecode.com/svn/wiki/images/contentfilter-general.png
 Select *Content Filtering* and *General* to enable the _Local Database_ option.
 
 = Using within rules =
+
+[http://code.google.com/p/bluecoaturl/ [HOME]]
