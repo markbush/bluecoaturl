@@ -1,4 +1,4 @@
-#summary !BlueCoat URL Application Installation Guide
+#summary BlueCoatURL Application Installation Guide
 [http://code.google.com/p/bluecoaturl/ [TOP]]
 
 = Introduction =
