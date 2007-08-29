@@ -1,6 +1,8 @@
 #summary BlueCoatURL Application Installation Guide
-[http://code.google.com/p/bluecoaturl/ [TOP]]
+[http://code.google.com/p/bluecoaturl/ [HOME]]
 
 = Introduction =
 
 _Full details of how to install will appear here..._
+
+[http://code.google.com/p/bluecoaturl/ [HOME]]
