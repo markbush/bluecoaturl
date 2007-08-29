@@ -1,5 +1,5 @@
 #summary Screenshots of the application in action
-[http://code.google.com/p/bluecoaturl/ [TOP]]
+[http://code.google.com/p/bluecoaturl/ [HOME]]
 
 = Introduction =
 
@@ -8,3 +8,5 @@ _screenshots to come_
 = Details =
 
 _screenshots to come_
+
+[http://code.google.com/p/bluecoaturl/ [HOME]]
