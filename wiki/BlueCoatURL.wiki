@@ -1,5 +1,5 @@
 #summary The BlueCoat URL Application
-[http://code.google.com/p/bluecoaturl/ [TOP]]
+[http://code.google.com/p/bluecoaturl/ [HOME]]
 
 = Introduction =
 
@@ -31,3 +31,5 @@ To enable your !BlueCoat proxies to update from the application, point them at /
 If you have a configuration already that you wish to import, there is an option available for you to upload this into the application.
 
 The !BlueCoat proxy only allows for a scheduled download *once* per day; the deployment option allows specified users to deploy on-demand.
+
+[http://code.google.com/p/bluecoaturl/ [HOME]]
