@@ -1,5 +1,5 @@
 #summary SmartFilter URL database.
-[http://code.google.com/p/bluecoaturl/ [TOP]]
+[http://code.google.com/p/bluecoaturl/ [HOME]]
 
 = [http://www.smartfilter.com SmartFilter] =
 
@@ -25,3 +25,4 @@ Secure Computing is not the only vendor to offer URL categorisation services.
   * Webwasher
 
 
+[http://code.google.com/p/bluecoaturl/ [HOME]]
