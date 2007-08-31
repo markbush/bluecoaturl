@@ -76,7 +76,7 @@ class Webaddress < ActiveRecord::Base
   end
 
   def address
-    "http://#{self.site}#{self.path}"
+    "#{self.site}#{self.path}"
   end
   
   def update_hosts
