@@ -3,7 +3,7 @@ class Deployer
     hosts = Host.find(:all)
     hosts.each do |host|
       if hostnames.empty? || hostnames.include?(host.hostname)
-        puts "Calling: host.deploy for #{host.hostname}"
+        puts "Deploying to: #{host.hostname}"
         begin
           res = host.deploy
           puts "Result:"
