@@ -43,9 +43,11 @@ class Host < ActiveRecord::Base
                   ['#\(config content-filter\)', "local\n", true],
                   ['#\(config local\)', "download get-now\n"]])
     d = e.expect([['failed', "exit\n"], ['ok', "exit\n"]])
+    result = d[0]
     self.update_attribute(:dirty, false) if d[1] == 'ok'
     d = e.expect([['#', "exit\n", true]])
     e.close if e.open?
+    result
   end
 
   def self.make_dirty
