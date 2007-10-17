@@ -57,4 +57,31 @@ class Host < ActiveRecord::Base
       host.update_attribute(:dirty, true)
     end
   end
+
+  def testurl *urllist
+    e = Expect::Expecter.new
+    e.ssh_connect(self.hostname , self.username, self.password)
+    d = e.expect([['>' , "enable\n" , true],
+                  ['Invalid password', :CLOSE],
+                  ['Enable Password:', "#{enable_password}\n", true],
+                  ['#$', "conf t\n", true],
+                  ['#\(config\)', "content-filter\n", true],
+                  ['#\(config content-filter\)', nil]])
+    results={}
+    urllist.each do |url|
+      # test each URL
+      e.send "test-url #{url}\n"
+      d = e.expect([['#\(config content-filter\)', nil]])
+      lines=d[0].split /[\n\r]+/
+      lines.pop
+      lines.shift
+      lines.shift
+      results[url]=lines.join "\n"
+    end 
+    e.send "exit\n"
+    d = e.expect([['#', "exit\n", true]])
+    e.close if e.open?
+    results
+  end 
+                  
 end
