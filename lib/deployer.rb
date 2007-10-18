@@ -5,7 +5,11 @@ class Deployer
       if hostnames.empty? || hostnames.include?(host.hostname)
         puts "Deploying to: #{host.hostname}"
         begin
-          res = host.deploy
+          if host.dirty
+             res = host.deploy 
+          else
+             res = "No update needed at this time"
+          end
           puts "Result:"
           puts res
         rescue Exception => e
