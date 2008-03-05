@@ -1,6 +1,6 @@
 class Webaddress < ActiveRecord::Base
 
-  has_and_belongs_to_many :categories, :order => :name
+  has_and_belongs_to_many :categories, :order => :name, :foreign_key => :webaddress_id
   belongs_to              :user
 
   validates_presence_of   :site
