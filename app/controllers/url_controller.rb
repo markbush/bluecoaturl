@@ -136,8 +136,7 @@ class UrlController < ApplicationController
   end
 
   def download_setup
-    @categories = Category.find(:all, :order => :name)
-    @webaddresses = Webaddress.find(:all).select {|w| !w.categories.empty?}
+    @categories = Category.find(:all, :order => :name, :include => :webaddresses)
   end
 
   def download

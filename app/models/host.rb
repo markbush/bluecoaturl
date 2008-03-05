@@ -42,7 +42,15 @@ class Host < ActiveRecord::Base
                   ['#\(config\)', "content-filter\n", true],
                   ['#\(config content-filter\)', "local\n", true],
                   ['#\(config local\)', "download get-now\n"]])
+    if d.nil? || d[2].nil? || d[2].eql?(:TIMEOUT)
+      # Didn't match anything
+      return nil
+    end
     d = e.expect([['failed', "exit\n"], ['ok', "exit\n"]])
+    if d.nil? || d[2].nil? || d[2].eql?(:TIMEOUT)
+      # Didn't match anything
+      return nil
+    end
     result = d[0]
     self.update_attribute(:dirty, false) if d[1] == 'ok'
     d = e.expect([['#', "exit\n", true]])
