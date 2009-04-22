@@ -10,3 +10,13 @@
     <% end %>
   </fieldset>
 </div>
+
+<table cellpadding="5" cellspacing="0">
+   <% for history in @webaddress.histories %>
+     <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+       <td><%= history.reason%></td>
+       <td><%= history.user.name%></td>
+       <td><%= history.created_at%></td>
+     </tr>
+   <% end %>
+ </table>

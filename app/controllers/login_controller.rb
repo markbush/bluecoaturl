@@ -51,12 +51,12 @@ class LoginController < ApplicationController
 
   def destroy
     if request.post?
-      if User.count(:conditions => ["enabled = ? and admin = ?", true, true]) < 2
+      user = User.find(params[:id])
+      if user.admin && User.count(:conditions => ["enabled = ? and admin = ?", true, true]) < 2
         # Don't allow disable of last admin user
         flash[:notice] = "Can't delete last admin user!"
       else
         begin
-          user = User.find(params[:id])
           user.enabled = false
           if user.save
             flash[:notice] = "User #{user.name} deleted"
