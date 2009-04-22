@@ -128,12 +128,10 @@ class UrlController < ApplicationController
       @webaddresses.delete_if {|w| (w.categories - @categories).length == w.categories.count}
     end
     # Generate paginator for the list (@webaddresses)
-    page = (params[:page] ||= 1).to_i
-    items_per_page = 20
-    offset = (page - 1) * items_per_page
-    @webaddress_pages = Paginator.new(self, @webaddresses.length, items_per_page, page)
-    @webaddresses = @webaddresses[offset..(offset + items_per_page - 1)]
-  end
+    page = params[:page] || "1"
+    perpage = params[:per_page] || "20"
+    @webaddress_results = @webaddresses.paginate(:page => page, :per_page => perpage )
+ end
 
   def download_setup
     @categories = Category.find(:all, :order => :name, :include => :webaddresses)

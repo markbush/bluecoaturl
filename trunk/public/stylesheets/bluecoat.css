@@ -60,31 +60,11 @@ body, html {
   text-align: center;
 }
 
-#columns {
-  background: #0066cc;
-}
-
 #main {
-  margin-left: 146px;
+  margin-left: 0px;
   padding-top: 1em;
   padding-left: 12px;
   background: white;
-}
-
-#side {
-  padding-top: 1em;
-  padding-left: 6px;
-  padding-bottom: 1em;
-  width: 140px;
-  background: #0066cc;
-  position: absolute;
-  top: 80px;
-  left: 12px;
-}
-
-#side a {
-  color: #ccccff;
-  font-size: small;
 }
 
 h1 {

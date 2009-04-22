@@ -34,7 +34,7 @@
         </th>
       <% end %>
     </tr>
-    <% for webaddress in @webaddresses %>
+    <% for webaddress in @webaddress_results %>
       <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
         <td><%= link_to h(webaddress.address),
                         :action => :edit, :id => webaddress %></td>
@@ -51,22 +51,5 @@
     <% end %>
   </table>
   <hr/>
-  <p>
-    <%= link_to(h('< Previous'),
-                {:page => @webaddress_pages.current.previous,
-                 :sort => @selected,
-                 :urls_in_category => params[:urls_in_category],
-                 :search_categories => params[:search_categories],
-                 :search_url => params[:search_url]})  + " | " if @webaddress_pages.current.previous %>
-    <%= pagination_links @webaddress_pages, :params => {:sort => @selected,
-                                                        :urls_in_category => params[:urls_in_category],
-                                                        :search_categories => params[:search_categories],
-                                                        :search_url => params[:search_url]} %>
-    <%= " | " + link_to(h('Next >'),
-                        {:page => @webaddress_pages.current.next,
-                         :sort => @selected,
-                         :urls_in_category => params[:urls_in_category],
-                         :search_categories => params[:search_categories],
-                         :search_url => params[:search_url]}) if @webaddress_pages.current.next %>
-  </p>
+  <%= will_paginate @webaddress_results %>
 </div>
