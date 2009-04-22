@@ -1,0 +1,23 @@
+<tr class="<%= cycle('list-line-odd', 'list-line-even') %>" id='host_<%= host.id %>'>
+  <td class="list-title">
+    <%= h(host.hostname) %>
+  </td>
+  <td>
+    <%= h(host.username) %>
+  </td>
+  <td>
+    <div id='dirty_<%= host.id %>'>
+      <%= host.dirty? ? 'Yes' : 'No' %>
+    </div>
+  </td>
+  <td>
+    <%# div id='update_<%= host.id % >' %>
+      <%= @host = host; check_box :host, :dirty, {:id => "update_#{host.id}", :name => "update[#{host.id}]"} %>
+    <%# /div %>
+  </td>
+  <td>
+    <div id='status_<%= host.id %>'>
+      <%= host.dirty? ? 'Needs updating' : 'Up to date' %>
+    </div>
+  </td>
+</tr>
