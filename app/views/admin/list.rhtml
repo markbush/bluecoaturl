@@ -28,10 +28,7 @@
     <% end %>
   </table>
   <hr/>
-  <p>
-    <%= link_to(h('< Previous'), {:page => @category_pages.current.previous})  + " | " if @category_pages.current.previous %>
-    <%= pagination_links @category_pages %>
-    <%= " | " + link_to(h('Next >'), {:page => @category_pages.current.next}) if @category_pages.current.next %>
-  </p>
+
+<%= will_paginate @categories %>
   <hr/>
 </div>

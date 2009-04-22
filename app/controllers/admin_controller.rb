@@ -52,7 +52,8 @@ class AdminController < ApplicationController
 
   def list
     @all_categories = Category.find(:all, :order => :name)
-    @category_pages, @categories = paginate :categories, :order => :name
+#    @category_pages, @categories = paginate :categories, :order => :name
+    @categories = Category.paginate :page => params[:page], :order => :name 
   end
 
   def category_image

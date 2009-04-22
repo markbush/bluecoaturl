@@ -2,13 +2,14 @@ class Webaddress < ActiveRecord::Base
 
   has_and_belongs_to_many :categories, :order => :name
   belongs_to              :user
+  has_many                :histories
 
   validates_presence_of   :site
   validates_presence_of   :path
   validates_presence_of   :reason
   validates_format_of     :site,       :with => %r{^[^/\s]*$}, :message => "must just be site name with no path and no white space"
   validates_format_of     :site,       :with => %r{\S\.\S},    :message => "must not be a top level domain"
-  validates_format_of     :path,       :with => %r{^/[^\s]*$}
+  validates_format_of     :path,       :with => %r{^/[^\s?]*$}
 
   after_save              :update_hosts
   after_destroy           :update_hosts

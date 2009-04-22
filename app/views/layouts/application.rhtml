@@ -5,66 +5,80 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>BlueCoat URL Application</title>
-  <%= stylesheet_link_tag 'scaffold', 'bluecoat', :media => 'all' %>
-  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag 'scaffold', 'bluecoat', 'chrometheme/chromestyle', :media => 'all' %>
+  <%= javascript_include_tag 'chrome', :defaults %>
+ 
+<!-- 
+/***********************************************
+* Chrome CSS Drop Down Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/ -->
+
 </head>
 <body id="admin">
-  <div id="columns">
-    <div id="side">
-      <% if session[:user_name] %>
-        <p>
-          <%= link_to "Urls",              :controller => :url,   :action => :list %>
-        </p>
-        <p>
-          <%= link_to "Add Url",           :controller => :url,   :action => :new %>
-        </p>
-        <% if session[:user_admin] %>
-          <p>
-            <%= link_to "Orphaned URLs",   :controller => :url,   :action => :list_orphaned %>
-          </p>
-          <p>
-            <%= link_to "Download URLs",   :controller => :url,   :action => :download %>
-          </p>
-          <p>
-            <%= link_to "Upload URLs",     :controller => :url,   :action => :upload %>
-          </p>
-          <p>
-            <%= link_to "Categories",      :controller => :admin, :action => :list %>
-          </p>
-          <p>
-            <%= link_to "Add Category",    :controller => :admin, :action => :new %>
-          </p>
-          <p>
-            <%= link_to "Users",           :controller => :login, :action => :list %>
-          </p>
-          <p>
-            <%= link_to "Add User",        :controller => :login, :action => :new %>
-          </p>
-          <p>
-            <%= link_to "Hosts",           :controller => :hosts, :action => :list %>
-          </p>
-          <p>
-            <%= link_to "Add Host",        :controller => :hosts, :action => :new %>
-          </p>
-        <% end %>
-        <% if session[:user_can_deploy] || session[:user_admin] %>
-          <p>
-            <%= link_to "Deploy To Hosts", :controller => :hosts, :action => :deploy %>
-          </p>
-        <% end %>
-        <p>
-          <%= link_to "Change Password",   :controller => :login, :action => :change_password %>
-        </p>
-        <p>
-          <%= link_to "Logout: #{session[:user_name]}",
-                                           :controller => :login, :action => :logout %>
-        </p>
-      <% else %>
-        <p>
-          <%= link_to "Login",             :controller => :login, :action => :login %>
-        </p>
-      <% end %>
-    </div>
+
+<div class="chromestyle" id="chromemenu">
+<ul>
+<% if session[:user_name] %>
+<li><a href="#" rel="dropmenu1">URLs</a></li>
+<% if session[:user_admin] %>
+<li><a href="#" rel="dropmenu2">Categories</a></li>
+<% end %>
+<% if session[:user_can_deploy] || session[:user_admin] %>
+<li><a href="#" rel="dropmenu3">Hosts</a></li>	
+<% end %>
+<li><a href="#" rel="dropmenu4">Admin</a></li>
+<li><%= link_to "Logout: #{session[:user_name]}", :controller => :login, :action => :logout %></li>
+<% else %>
+<% end %>
+</ul>
+</div>
+
+<!--1st drop down menu -->                                                   
+<div id="dropmenu1" class="dropmenudiv">
+<%= link_to "List",              :controller => :url,   :action => :list %>
+<%= link_to "Add",           :controller => :url,   :action => :new %>
+<% if session[:user_admin] %>
+    <%= link_to "Orphaned",   :controller => :url,   :action => :list_orphaned %>
+    <%= link_to "Download",   :controller => :url,   :action => :download %>
+    <%= link_to "Upload",     :controller => :url,   :action => :upload %>
+<% end %>
+
+</div>
+
+
+<!--2nd drop down menu -->                                                
+<div id="dropmenu2" class="dropmenudiv" style="width: 150px;">
+<%= link_to "Categories",      :controller => :admin, :action => :list %>
+<%= link_to "Add Category",    :controller => :admin, :action => :new %>
+</div>
+
+<!--3rd drop down menu -->                                                   
+<div id="dropmenu3" class="dropmenudiv" style="width: 150px;">
+<% if session[:user_admin] %>
+<%= link_to "Hosts",           :controller => :hosts, :action => :list %>
+<%= link_to "Add Host",        :controller => :hosts, :action => :new %>
+<% end %>
+<%= link_to "Deploy To Hosts", :controller => :hosts, :action => :deploy %>
+</div>
+
+<!--4th drop down menu -->                                                   
+<div id="dropmenu4" class="dropmenudiv" style="width: 150px;">
+<%= link_to "Change Password",   :controller => :login, :action => :change_password %>
+<% if session[:user_admin] %>
+<%= link_to "Users",           :controller => :login, :action => :list %>
+<%= link_to "Add User",        :controller => :login, :action => :new %>
+<% end %>
+</div>
+
+<script type="text/javascript">
+
+cssdropdown.startchrome("chromemenu")
+
+</script>
+
+    
     <div id="main">
       <% if flash[:notice] -%>
         <div id="notice"><%= flash[:notice] %></div>

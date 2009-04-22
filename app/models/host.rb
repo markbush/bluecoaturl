@@ -42,14 +42,18 @@ class Host < ActiveRecord::Base
                   ['#\(config\)', "content-filter\n", true],
                   ['#\(config content-filter\)', "local\n", true],
                   ['#\(config local\)', "download get-now\n"]])
-    if d.nil? || d[2].nil? || d[2].eql?(:TIMEOUT)
+    if d.nil? || d[2].nil?
       # Didn't match anything
-      return nil
+      return "Unexpected response: #{d.inspect}"
+    elsif d[2].eql?(:TIMEOUT)
+      return "Timeout while communicating with remote end"
     end
     d = e.expect([['failed', "exit\n"], ['ok', "exit\n"]])
-    if d.nil? || d[2].nil? || d[2].eql?(:TIMEOUT)
+    if d.nil? || d[2].nil?
       # Didn't match anything
-      return nil
+      return "Unexpected response: #{d.inspect}"
+    elsif d[2].eql?(:TIMEOUT)
+      return "Timeout while communicating with remote end"
     end
     result = d[0]
     self.update_attribute(:dirty, false) if d[1] == 'ok'
