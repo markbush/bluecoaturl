@@ -14,9 +14,9 @@
 development:
   adapter: mysql
   database: bluecoat_development
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: railsapps
+  password: tigerbalm
+  socket: /var/lib/mysql/mysql.sock
 
 # Warning: The database defined as 'test' will be erased and
 # re-generated from your development database when you run 'rake'.
@@ -24,13 +24,13 @@ development:
 test:
   adapter: mysql
   database: bluecoat_test
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: railsapps
+  password: tigerbalm
+  socket: /var/lib/mysql/mysql.sock
 
 production:
   adapter: mysql
   database: bluecoat_production
-  username: root
-  password: 
-  socket: /tmp/mysql.sock
+  username: railsapps
+  password: tigerbalm
+  socket: /var/lib/mysql/mysql.sock

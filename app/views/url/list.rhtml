@@ -1,6 +1,5 @@
 <div id="bluecoat-list">
-  <h1>URLs</h1>
-  <div class="bluecoat-form">
+<!--  <div class="bluecoat-form">
     <fieldset>
       <legend><%= link_to_function "Search", "new Effect.toggle('searchbox', 'slide')" %></legend>
         <div id="searchbox" style="display: none">
@@ -11,8 +10,8 @@
           <% end %>
         </div>
     </fieldset>
-  </div>
-  <table cellpadding="5" class="bluecoat-table">
+  </div> -->
+  <table class="bluecoat-table">
     <tr>
       <th class="url">
         <%= link_to "URL", :action => :list, :sort => :site %>
@@ -33,7 +32,7 @@
     </tr>
     <% for webaddress in @webaddress_results %>
       <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
-        <td><%= link_to h(webaddress.address),
+	<td><%= link_to h(webaddress.address),
                         :action => :edit, :id => webaddress %></td>
         <td><%= h(webaddress.lasthistory.reason) %></td>
         <% if session[:user_admin] %>

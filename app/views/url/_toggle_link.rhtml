@@ -1,11 +1,11 @@
 <%if webaddress.categories.include?(category) %>
-<%= link_to_remote image_tag('/images/greenball.gif', :title => h(category.name)),
+<%= link_to_remote image_tag('/images/tick.png', :title => h(category.name)),
                    :update => "toggle-#{webaddress.id}-#{category.id}",
                    :url => {:action => :remove_association,
                                  :id => "#{webaddress.id}-#{category.id}",
                                  :method => :post} %>
 <% else %>
-<%= link_to_remote image_tag('/images/redball.gif', :title => h(category.name)),
+<%= link_to_remote image_tag('/images/cross.png', :title => h(category.name)),
                    :update => "toggle-#{webaddress.id}-#{category.id}",
                    :url => {:action => :add_association,
                             :id => "#{webaddress.id}-#{category.id}",

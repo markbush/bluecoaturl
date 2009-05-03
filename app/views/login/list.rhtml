@@ -5,7 +5,7 @@
     <% for user in @active_users %>
       <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
         <td class="list-title">
-          <%= link_to "X", { :action => :destroy, :id => user },
+          <%= link_to image_tag('/images/trash.gif', :title => 'Trash'), { :action => :destroy, :id => user },
                              :method => :post %>
         </td>
         <td class="list-title">
