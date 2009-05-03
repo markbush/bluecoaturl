@@ -12,6 +12,7 @@
 </div>
 
 <table cellpadding="5" cellspacing="0">
+<tr><th>Reason</th><th>User</th><th>Date / time</th></tr>
    <% for history in @webaddress.histories %>
      <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
        <td><%= history.reason%></td>

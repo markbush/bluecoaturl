@@ -1,5 +1,7 @@
 # Be sure to restart your server when you modify this file
 
+RAILS_ENV="development"
+
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
@@ -40,16 +42,16 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
-#ActionMailer::Base.smtp_settings = {
-#  :address => "dksexc01.eidos.com",
-#  :domain => 'eidos.co.uk'
-#}
+ActionMailer::Base.smtp_settings = {
+  :address => "dksexc01.eidos.com",
+  :domain => 'eidos.co.uk'
+}
 
 # Exception notification
-#ExceptionNotifier.exception_recipients = %w(mattw@eidos.co.uk)
-#ExceptionNotifier.sender_address = %("Application Error" <noreply@eidos.co.uk>)
-#ExceptionNotifier.email_prefix = "[Rails: BlueCoat] "
+ExceptionNotifier.exception_recipients = %w(mattw@eidos.co.uk)
+ExceptionNotifier.sender_address = %("Application Error" <noreply@eidos.co.uk>)
+ExceptionNotifier.email_prefix = "[Rails: BlueCoat-Dev] "
 
-#ActionController::Base.relative_url_root = "/testapp"
+ActionController::Base.relative_url_root = "/bluecoat-dev"
 
 require 'will_paginate'

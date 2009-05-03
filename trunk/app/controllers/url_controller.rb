@@ -52,7 +52,7 @@ class UrlController < ApplicationController
     begin
       @webaddress = Webaddress.find(params[:id])
       if request.post? and params[:webaddress] and @webaddress.update_attributes(params[:webaddress])
-        History.create :reason => params[:history][:reason], :user_id => session[:user_id], :webaddress_id => @webaddress.id
+       History.create :reason => params[:history][:reason], :user_id => session[:user_id], :webaddress_id => @webaddress.id
         flash[:notice] = "URL #{@webaddress.address} updated"
         redirect_to :action => :list
       else
@@ -229,6 +229,7 @@ class UrlController < ApplicationController
         category = Category.find(ids[1])
         unless category.webaddresses.include?(webaddress)
           category.webaddresses.push(webaddress)
+          History.create :reason => "Added to category #{category.name}", :user_id => session[:user_id], :webaddress_id => webaddress.id
         end
         render :partial => 'toggle_link', :locals => {:webaddress => webaddress, :category => category}
       rescue ActiveRecord::RecordNotFound
@@ -245,6 +246,7 @@ class UrlController < ApplicationController
         webaddress = Webaddress.find(ids[0])
         category = Category.find(ids[1])
         category.webaddresses.delete(webaddress)
+        History.create :reason => "Removed from category #{category.name}", :user_id => session[:user_id], :webaddress_id => webaddress.id
         render :partial => 'toggle_link', :locals => {:webaddress => webaddress, :category => category}
       rescue ActiveRecord::RecordNotFound
         logger.error("Attempt to remove invalid association: #{params[:id]}")

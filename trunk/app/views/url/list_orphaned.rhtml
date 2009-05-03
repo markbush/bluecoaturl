@@ -6,10 +6,6 @@
       <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
         <td>
           <span class="list-title"><%= h(webaddress.address) %></span><br/>
-          <% unless webaddress.ticket.blank? %>
-            [<%= h(webaddress.ticket) %>]
-          <% end %>
-          <%= h(webaddress.reason) %>
         </td>
       </tr>
     <% end %>
