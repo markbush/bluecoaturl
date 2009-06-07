@@ -1,0 +1,12 @@
+<div class="bluecoat-form">
+  <%= error_messages_for 'webaddress' %>
+
+  <fieldset>
+    <legend>Enter URL Details</legend>
+
+    <% form_tag :action => :create do %>
+      <%= render :partial => 'form' %>
+      <%= submit_tag "Add URL", :class => :submit %>
+    <% end %>
+  </fieldset>
+</div>

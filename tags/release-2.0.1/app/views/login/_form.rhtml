@@ -1,0 +1,13 @@
+<p>
+  <label for="user_name">Name:</label>
+  <%= text_field :user, :name, :size => 60 %>
+</p>
+<%= render :partial => 'password' %>
+<p>
+  <label for="user_admin">Admin?</label>
+  <%= check_box :user, :admin %>
+</p>
+<p>
+  <label for="user_can_deploy">Can Deploy?</label>
+  <%= check_box :user, :can_deploy %>
+</p>

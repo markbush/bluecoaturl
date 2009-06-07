@@ -1,0 +1,9 @@
+<% for category in @categories -%>
+define category <%= h(category.name) %>
+<% webaddresses = category.webaddresses -%>
+<% for webaddress in webaddresses -%>
+<%= h(webaddress.site)+h(webaddress.path) %>
+<% end -%>
+end
+
+<% end -%>

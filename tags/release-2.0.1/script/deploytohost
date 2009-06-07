@@ -1,0 +1,14 @@
+#!/bin/sh
+
+RAILS_ENV=production
+export PATH RAILS_ENV
+
+cd /var/www/railsapps/bluecoat
+
+CMD="Deployer.deploy"
+
+for host in "$@" ; do
+  CMD=$CMD' "'"$host"'"'
+done 
+
+./script/runner "$CMD"
