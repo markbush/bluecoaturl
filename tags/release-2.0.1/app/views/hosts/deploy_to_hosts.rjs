@@ -1,0 +1,12 @@
+@hosts.each do |h|
+  if @hosts_to_update.include? h.id.to_s
+    page["status_#{h.id}"].update('Deploy pending (please wait)...')
+  elsif h.dirty?
+    page["status_#{h.id}"].update('Needs updating')
+  else
+    page["status_#{h.id}"].update('Up to date')
+  end
+end
+@hosts_to_update.each do |h|
+  page << remote_function(:url => {:action => :perform_deploy, :id => h})
+end

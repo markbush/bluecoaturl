@@ -1,0 +1,12 @@
+<div class="bluecoat-form">
+  <%= error_messages_for 'category' %>
+
+  <fieldset>
+    <legend>Edit Category</legend>
+
+    <% form_tag :action => :update, :id => @category do %>
+      <%= render :partial => 'form' %>
+      <%= submit_tag "Update", :class => :submit %>
+    <% end %>
+  </fieldset>
+</div>
