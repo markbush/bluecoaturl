@@ -39,7 +39,7 @@ body, html {
 }
 
 #bluecoat-list .list-line-odd {
-  background:   #ebfbff;
+  background:   #66aaff;
 }
 
 #bluecoat-list .order {
@@ -70,6 +70,7 @@ body, html {
 h1 {
   font:  150% sans-serif;
   color: #226;
+  border-bottom: 3px dotted #77d;
 }
 
 a img {
@@ -79,12 +80,12 @@ a img {
 /* Styles for forms */
 
 .bluecoat-form fieldset {
-  background: #ebfbff;
+  background: #efe;
 }
 
 .bluecoat-form legend {
   color: #dfd;
-  background: #99ccff;
+  background: #0066cc;
   font-family: sans-serif;
   padding: 0.2em 1em;
 }
@@ -137,8 +138,4 @@ a img {
 #errorExplanation ul li {
   font-size: 12px;
   list-style: square;
-}
-
-.center {
-	text-align: center ;
 }

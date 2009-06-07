@@ -44,7 +44,10 @@ module Expect
             expectContinue = true if m[2]
           else
             # Didn't match any expect items so continue reading
-            expectContinue = true
+            # but only if the connection is still open
+            if @connection.open?
+              expectContinue = true
+            end
           end
         end
       end while (expectContinue)
@@ -77,26 +80,27 @@ module Expect
     def initialize(host, user, passwd)
       @data = ''
       @out_buf = ''
-      @channel_open = false
+      @channel_open = true
+      @session = nil
+      @channel = nil
       begin
         @session = Net::SSH.start(host, user, :password => passwd)
       rescue Net::SSH::AuthenticationFailed
         raise 'Authentication Failed'
       end
-      @session.open_channel do |channel|
-        @channel = channel
-        @channel.on_data {|c, d| @data += d if d}
-        @channel.on_eof {|c| @channel_open = false}
-        @channel.on_close {|c| @channel_open = false}
+      @session.open_channel do |ch|
+        @channel = ch
+        ch.on_eof {|c| @channel_open = false}
+        ch.on_close {|c| @channel_open = false}
         @channel.send_channel_request 'shell' do |ch, success|
           if success
+            ch.on_data {|c, d| @data += d if d }
             @channel_open = true
           else
             @channel_open = false
           end
         end
       end
-      @channel = @session.open_channel
     end
     def send(data)
       @out_buf += data unless data.empty?
@@ -110,9 +114,9 @@ module Expect
       @data = ''
       begin
         Timeout::timeout(timeout) do |t|
-        @session.loop {@channel && @data.empty?}
-      end
-      @data
+          @session.loop { @channel_open && @data.empty?}
+        end
+        @data
       rescue Timeout::Error
         return :TIMEOUT
       rescue TypeError
@@ -122,6 +126,8 @@ module Expect
         # We treat this situation as if the connection has closed.
         self.close
         return nil
+      rescue Exception => e
+        puts "[EXCEPTION] #{e}"
       end
     end
     def close
