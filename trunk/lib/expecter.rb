@@ -79,16 +79,24 @@ module Expect
       @out_buf = ''
       @channel_open = false
       begin
-        @session = Net::SSH.start(host, user, passwd)
+        @session = Net::SSH.start(host, user, :password => passwd)
       rescue Net::SSH::AuthenticationFailed
         raise 'Authentication Failed'
       end
+      @session.open_channel do |channel|
+        @channel = channel
+        @channel.on_data {|c, d| @data += d if d}
+        @channel.on_eof {|c| @channel_open = false}
+        @channel.on_close {|c| @channel_open = false}
+        @channel.send_channel_request 'shell' do |ch, success|
+          if success
+            @channel_open = true
+          else
+            @channel_open = false
+          end
+        end
+      end
       @channel = @session.open_channel
-      @channel.on_success {|c| @channel_open = true}
-      @channel.on_data {|c, d| @data += d if d}
-      @channel.on_eof {|c| @channel_open = false}
-      @channel.on_close {|c| @channel_open = false}
-      @channel.on_confirm_open {@channel.send_request 'shell', nil, true}
     end
     def send(data)
       @out_buf += data unless data.empty?
