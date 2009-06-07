@@ -1,0 +1,141 @@
+/* Global styles */
+
+body, html {
+  padding: 6px;
+  margin: 0;
+  border: 0;
+}
+
+/* START:notice */
+#notice {
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+/* END:notice */
+
+/* Styles for admin/list */
+
+#bluecoat-list th {
+  vertical-align: bottom
+}
+
+#bluecoat-list .list-title {
+  color:        #244;
+  font-weight:  bold;
+  font-size:    larger;
+}
+
+#bluecoat-list .list-actions {
+  font-size:    x-small;
+  text-align:   right;
+  padding-left: 1em;
+}
+
+#bluecoat-list .list-line-even {
+  background:   #99ccff;
+}
+
+#bluecoat-list .list-line-odd {
+  background:   #66aaff;
+}
+
+#bluecoat-list .order {
+  border: black solid 1px
+}
+
+/* Styles for main page */
+
+#banner {
+  background: #003366;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid;
+  font-family: "Times New Roman", Times, serif;
+  font-variant: small-caps;
+  font-size: 40px;
+  color: #ccccff;
+  text-align: center;
+}
+
+#main {
+  margin-left: 0px;
+  padding-top: 1em;
+  padding-left: 12px;
+  background: white;
+}
+
+h1 {
+  font:  150% sans-serif;
+  color: #226;
+  border-bottom: 3px dotted #77d;
+}
+
+a img {
+  border-style: none
+}
+
+/* Styles for forms */
+
+.bluecoat-form fieldset {
+  background: #efe;
+}
+
+.bluecoat-form legend {
+  color: #dfd;
+  background: #0066cc;
+  font-family: sans-serif;
+  padding: 0.2em 1em;
+}
+
+.bluecoat-form label {
+  width: 6.5em;
+  float: left;
+  text-align: right;
+  margin-right: 0.5em;
+  display: block;
+}
+
+.bluecoat-form .submit {
+  margin-left: 7em;
+}
+
+/* The error box */
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
