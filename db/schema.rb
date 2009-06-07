@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 12) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "categories", :force => true do |t|
     t.string "name"
@@ -25,23 +25,12 @@ ActiveRecord::Schema.define(:version => 12) do
   add_index "categories_webaddresses", ["category_id", "webaddress_id"], :name => "index_categories_webaddresses_on_category_id_and_webaddress_id", :unique => true
   add_index "categories_webaddresses", ["webaddress_id"], :name => "index_categories_webaddresses_on_webaddress_id"
 
-  create_table "histories", :force => true do |t|
-    t.integer  "webaddress_id", :null => false
-    t.integer  "user_id",       :null => false
-    t.text     "reason"
-    t.datetime "created_at"
-  end
-
   create_table "hosts", :force => true do |t|
     t.string  "hostname"
     t.string  "username"
     t.string  "password"
     t.string  "enable_password"
     t.boolean "dirty"
-  end
-
-  create_table "schema_info", :id => false, :force => true do |t|
-    t.integer "version"
   end
 
   create_table "sessions", :force => true do |t|
@@ -66,7 +55,9 @@ ActiveRecord::Schema.define(:version => 12) do
     t.string   "site"
     t.string   "path"
     t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "user_id",    :null => false
+    t.text     "reason"
+    t.string   "ticket"
   end
 
 end

@@ -15,6 +15,7 @@ class UrlController < ApplicationController
   def create
     action = :new
     @webaddress = Webaddress.new(params[:webaddress])
+    @webaddress.user_id = session[:user_id]
     if request.post?
       if params[:confirm] && (params[:confirm].to_i == 1)
         existing = false
@@ -22,7 +23,6 @@ class UrlController < ApplicationController
         existing = @webaddress.check_address(self)
       end
       if ! existing && @webaddress.save
-        History.create :reason => params[:history][:reason], :user_id => session[:user_id], :webaddress_id => @webaddress.id
         redirect_to :action => :list
       else
         @categories = Category.find(:all, :order => :name).collect {|c| [c.name, c.id]}
@@ -40,7 +40,6 @@ class UrlController < ApplicationController
       @webaddress = Webaddress.find(params[:id])
       @categories = Category.find(:all, :order => :name).collect {|c| [c.name, c.id]}
       @selected = @webaddress.categories.collect {|c| c.id.to_i }
-      @history = @webaddress.lasthistory
     rescue ActiveRecord::RecordNotFound
       logger.error("Attempt to edit invalid url: #{params[:id]}")
       flash[:notice] = "Invalid URL"
@@ -51,8 +50,8 @@ class UrlController < ApplicationController
   def update
     begin
       @webaddress = Webaddress.find(params[:id])
+      @webaddress.user_id = session[:user_id]
       if request.post? and params[:webaddress] and @webaddress.update_attributes(params[:webaddress])
-       History.create :reason => params[:history][:reason], :user_id => session[:user_id], :webaddress_id => @webaddress.id
         flash[:notice] = "URL #{@webaddress.address} updated"
         redirect_to :action => :list
       else
@@ -97,22 +96,13 @@ class UrlController < ApplicationController
         category = Category.find(params[:sort])
         @selected = category.id
         @webaddresses = category.webaddresses
-        others = Webaddress.find(:all,  
-                                       :include => [{:histories => :user}, :categories], 
-                                       :conditions => 'histories.id=histories.id' , 
-                                       :order => 'webaddresses.site, histories.created_at desc' ) - @webaddresses
+        others = Webaddress.find(:all, :order => :site) - @webaddresses
         @webaddresses += others
       rescue ActiveRecord::RecordNotFound
-        @webaddresses = Webaddress.find(:all, 
-                                       :include => [{:histories => :user}, :categories], 
-                                       :conditions => 'histories.id=histories.id' , 
-                                       :order => 'webaddresses.site, histories.created_at desc' ).select {|w| !w.categories.empty?}
+        @webaddresses = Webaddress.find(:all, :order => :site).select {|w| !w.categories.empty?}
       end
     else
-      @webaddresses = Webaddress.find(:all,  
-                                     :include => [{:histories => :user}, :categories], 
-                                     :conditions => 'histories.id=histories.id' , 
-                                     :order => 'webaddresses.site, histories.created_at desc' ).select {|w| !w.categories.empty?}
+      @webaddresses = Webaddress.find(:all, :order => :site).select {|w| !w.categories.empty?}
     end
     @all_categories = Category.find(:all, :order => :name)
     @categories = @all_categories.dup
@@ -229,7 +219,6 @@ class UrlController < ApplicationController
         category = Category.find(ids[1])
         unless category.webaddresses.include?(webaddress)
           category.webaddresses.push(webaddress)
-          History.create :reason => "Added to category #{category.name}", :user_id => session[:user_id], :webaddress_id => webaddress.id
         end
         render :partial => 'toggle_link', :locals => {:webaddress => webaddress, :category => category}
       rescue ActiveRecord::RecordNotFound
@@ -246,7 +235,6 @@ class UrlController < ApplicationController
         webaddress = Webaddress.find(ids[0])
         category = Category.find(ids[1])
         category.webaddresses.delete(webaddress)
-        History.create :reason => "Removed from category #{category.name}", :user_id => session[:user_id], :webaddress_id => webaddress.id
         render :partial => 'toggle_link', :locals => {:webaddress => webaddress, :category => category}
       rescue ActiveRecord::RecordNotFound
         logger.error("Attempt to remove invalid association: #{params[:id]}")

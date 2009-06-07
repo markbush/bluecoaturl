@@ -1,5 +1,6 @@
 <div id="bluecoat-list">
-<!--  <div class="bluecoat-form">
+  <h1>URLs</h1>
+  <div class="bluecoat-form">
     <fieldset>
       <legend><%= link_to_function "Search", "new Effect.toggle('searchbox', 'slide')" %></legend>
         <div id="searchbox" style="display: none">
@@ -10,12 +11,15 @@
           <% end %>
         </div>
     </fieldset>
-  </div> -->
-  <table class="bluecoat-table">
+  </div>
+  <table cellpadding="5" class="bluecoat-table">
     <tr>
       <th class="url">
         <%= link_to "URL", :action => :list, :sort => :site %>
       </th>
+      <% if session[:user_admin] %>
+        <th class="ticket">Ticket</th>
+      <% end %>
       <th class="reason">Reason</th>
       <% if session[:user_admin] %>
         <th class="user">User</th>
@@ -32,11 +36,14 @@
     </tr>
     <% for webaddress in @webaddress_results %>
       <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
-	<td><%= link_to h(webaddress.address),
+        <td><%= link_to h(webaddress.address),
                         :action => :edit, :id => webaddress %></td>
-        <td><%= h(webaddress.lasthistory.reason) %></td>
         <% if session[:user_admin] %>
-          <td><%= h(webaddress.lasthistory.user.name) %></td>
+          <td><%= h(webaddress.ticket) %></td>
+        <% end %>
+        <td><%= h(webaddress.reason) %></td>
+        <% if session[:user_admin] %>
+          <td><%= h(webaddress.user.name) %></td>
         <% end %>
         <%= render :partial => 'toggle', :collection => @categories,
                    :locals => {:webaddress => webaddress} %>

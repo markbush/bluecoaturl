@@ -21,14 +21,14 @@
 <div class="chromestyle" id="chromemenu">
 <ul>
 <% if session[:user_name] %>
-<li><%= link_to "URLs", {:controller => :url, :action => :list}, :rel => "URLmenu" %></li>
+<li><a href="#" rel="dropmenu1">URLs</a></li>
 <% if session[:user_admin] %>
-<li><a href="#" rel="CATmenu">Categories</a></li>
+<li><a href="#" rel="dropmenu2">Categories</a></li>
 <% end %>
 <% if session[:user_can_deploy] || session[:user_admin] %>
-<li><a href="#" rel="HOSTmenu">Hosts</a></li>	
+<li><a href="#" rel="dropmenu3">Hosts</a></li>	
 <% end %>
-<li><a href="#" rel="USERmenu">Admin</a></li>
+<li><a href="#" rel="dropmenu4">Admin</a></li>
 <li><%= link_to "Logout: #{session[:user_name]}", :controller => :login, :action => :logout %></li>
 <% else %>
 <% end %>
@@ -36,7 +36,7 @@
 </div>
 
 <!--1st drop down menu -->                                                   
-<div id="URLmenu" class="dropmenudiv">
+<div id="dropmenu1" class="dropmenudiv">
 <%= link_to "List",              :controller => :url,   :action => :list %>
 <%= link_to "Add",           :controller => :url,   :action => :new %>
 <% if session[:user_admin] %>
@@ -44,29 +44,30 @@
     <%= link_to "Download",   :controller => :url,   :action => :download %>
     <%= link_to "Upload",     :controller => :url,   :action => :upload %>
 <% end %>
+
 </div>
 
 
 <!--2nd drop down menu -->                                                
-<div id="CATmenu" class="dropmenudiv" style="width: 150px;">
-<%= link_to "List",      :controller => :admin, :action => :list %>
+<div id="dropmenu2" class="dropmenudiv" style="width: 150px;">
+<%= link_to "Categories",      :controller => :admin, :action => :list %>
 <%= link_to "Add Category",    :controller => :admin, :action => :new %>
 </div>
 
 <!--3rd drop down menu -->                                                   
-<div id="HOSTmenu" class="dropmenudiv" style="width: 150px;">
+<div id="dropmenu3" class="dropmenudiv" style="width: 150px;">
 <% if session[:user_admin] %>
-<%= link_to "List",           :controller => :hosts, :action => :list %>
+<%= link_to "Hosts",           :controller => :hosts, :action => :list %>
 <%= link_to "Add Host",        :controller => :hosts, :action => :new %>
 <% end %>
 <%= link_to "Deploy To Hosts", :controller => :hosts, :action => :deploy %>
 </div>
 
 <!--4th drop down menu -->                                                   
-<div id="USERmenu" class="dropmenudiv" style="width: 150px;">
+<div id="dropmenu4" class="dropmenudiv" style="width: 150px;">
 <%= link_to "Change Password",   :controller => :login, :action => :change_password %>
 <% if session[:user_admin] %>
-<%= link_to "List",           :controller => :login, :action => :list %>
+<%= link_to "Users",           :controller => :login, :action => :list %>
 <%= link_to "Add User",        :controller => :login, :action => :new %>
 <% end %>
 </div>
